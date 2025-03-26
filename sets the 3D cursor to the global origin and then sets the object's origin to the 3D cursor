@@ -1,0 +1,14 @@
+import bpy
+
+# Set the 3D cursor location to the global origin
+bpy.context.scene.cursor.location = (0.0, 0.0, 0.0)
+
+# Get the active object
+obj = bpy.context.object
+
+if obj is not None:
+    # Set the origin to the 3D cursor
+    bpy.ops.object.origin_set(type='ORIGIN_CURSOR')
+    print("Object origin set to the 3D cursor at the global origin.")
+else:
+    print("No object selected!")
