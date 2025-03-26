@@ -1,0 +1,15 @@
+import bpy
+
+# Get the selected objects
+selected_objects = bpy.context.selected_objects
+
+if selected_objects:
+    # Set the active object (the one that will remain after joining)
+    bpy.context.view_layer.objects.active = selected_objects[0]
+    
+    # Join the selected objects
+    bpy.ops.object.join()
+    
+    print("Selected objects merged into a single object.")
+else:
+    print("No objects selected!")
