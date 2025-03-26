@@ -1,0 +1,29 @@
+import bpy
+from mathutils import Vector
+
+# Get the active object
+obj = bpy.context.object
+
+if obj is not None:
+    # Calculate the bounding box world coordinates
+    bbox = [obj.matrix_world @ Vector(corner) for corner in obj.bound_box]
+
+    # Find the lowest Z point
+    min_z = min(v.z for v in bbox)
+
+    # Find the average of the bottom face's X and Y coordinates
+    avg_x = sum(v.x for v in bbox) / 8
+    avg_y = sum(v.y for v in bbox) / 8
+
+    # Set the 3D cursor location
+    bpy.context.scene.cursor.location = (avg_x, avg_y, min_z)
+    
+    # Calculate the offset to move the object to the world origin
+    offset = Vector((avg_x, avg_y, min_z))
+    
+    # Move the object so that the bottom-most point is at the world origin
+    obj.location -= offset
+    
+    print("Cursor moved to the lowest point of the object and object moved to the world origin.")
+else:
+    print("No object selected!")
