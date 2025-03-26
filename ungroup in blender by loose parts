@@ -1,0 +1,18 @@
+import bpy
+
+# Select the object
+obj = bpy.context.object
+
+if obj is not None:
+    # Enter Edit Mode
+    bpy.ops.object.mode_set(mode='EDIT')
+    
+    # Separate by loose parts
+    bpy.ops.mesh.separate(type='LOOSE')
+    
+    # Exit Edit Mode
+    bpy.ops.object.mode_set(mode='OBJECT')
+    
+    print("Object separated by loose parts.")
+else:
+    print("No object selected!")
