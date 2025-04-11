@@ -1,0 +1,10 @@
+import bpy
+
+def focus_selected_in_outliner():
+    for area in bpy.context.screen.areas:
+        if area.type == 'OUTLINER':
+            override = {'area': area, 'region': area.regions[-1], 'window': bpy.context.window}
+            bpy.ops.outliner.show_active(override)
+            break
+
+focus_selected_in_outliner()
