@@ -1,0 +1,22 @@
+import bpy
+
+class OUTLINER_OT_focus_selected(bpy.types.Operator):
+    bl_idname = "outliner.focus_selected"
+    bl_label = "Focus Outliner on Selected"
+
+    def execute(self, context):
+        for area in context.screen.areas:
+            if area.type == 'OUTLINER':
+                override = {'area': area, 'region': area.regions[-1], 'window': context.window}
+                bpy.ops.outliner.show_active(override)
+                break
+        return {'FINISHED'}
+
+def register():
+    bpy.utils.register_class(OUTLINER_OT_focus_selected)
+
+def unregister():
+    bpy.utils.unregister_class(OUTLINER_OT_focus_selected)
+
+if __name__ == "__main__":
+    register()
